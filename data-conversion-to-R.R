@@ -86,3 +86,8 @@ long_names
 sample_data_df %>%
 timePlot(., names(.)[-1], scales = list(y = list(relation = "free")))
 
+# save sample data array in RDS, columns (dim = 2) with names set
+saveRDS(
+  object = sample_data_df,
+  file = "data/sample_data_df.RDS"
+)
