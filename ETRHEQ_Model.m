@@ -126,11 +126,15 @@ missing_days = zeros(365,1)+1;
 rld_etrheq = zeros(48,365)+NaN;
 ghf_etrheq = zeros(48,365)+NaN;
 
+
+
 % groung heat flux is modeled as a fucntion of air temperature
 if obs_ghf == 0
     t = sample_data(:,:,1);
     ghf_mod =  calc_ghf(t,Isoil);
 end
+
+%PAREI AQUI
 
 for DY = 1:365; % run for all days in year, DY counts days
     
@@ -425,7 +429,8 @@ sh_obs_enbal = rsd_obs - rsu_obs + rld_obs - rlu_obs - le_obs - ghf_obs;
 daily_rmse_le = sqrt(nanmean((nanmean(le_etrheq)-nanmean(le_obs)).^2));
 daily_rmse_sh = sqrt(nanmean((nanmean(sh_etrheq)-nanmean(sh_obs)).^2));
 
-save(['test_run_',num2str(obs_ghf),num2str(obs_rld),'.mat'])
+%save(['test_run_',num2str(obs_ghf),num2str(obs_rld),'.mat'])
+save(['teste_run_',num2str(obs_ghf),num2str(obs_rld),'.mat'])
 % 'test_run_00.mat --> rld and ghf are modeled
 % 'test_run_10.mat --> rld is modeled, ghf is observed
 %  etc.
