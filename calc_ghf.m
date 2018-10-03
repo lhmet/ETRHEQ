@@ -32,14 +32,22 @@ s = 1:1:(48*365*2);
 g_save = zeros(1,(length(s)-1));
 
 for t=1:length(s)-1
-
+    t'
     II = (t-(48*365*1):(t-1));
     i = II(II>0);
+    
+    %JDT to avoid "error: operator /: nonconformant arguments (op1 is 1x1, op2 is 1x0)"
+    if length(i) == 0      % i is empty
+     DIF = NaN;
+     SQRT = NaN;
+    elseif length(i) > 0
+     DIF = (tsg_smth(i+1)-tsg_smth(i));
+     SQRT = (1./(s(i+1)-s(i))').*(sqrt(t - s(i)) - sqrt(t - s(i+1)))';
+    end
 
-    DIF = (tsg_smth(i+1)-tsg_smth(i));
-    SQRT = (1./(s(i+1)-s(i))').*(sqrt(t - s(i)) - sqrt(t - s(i+1)))'; 
-
-    gg = DIF.*SQRT;
+    %gg = DIF.*SQRT;
+    %JDT
+    gg = DIF.*SQRT';
     g_save(t) = nansum(gg);
 
 end
